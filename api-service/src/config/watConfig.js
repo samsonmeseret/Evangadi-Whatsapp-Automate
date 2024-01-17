@@ -1,14 +1,31 @@
-const qrcode = require("qrcode-terminal");
+// const { Client, RemoteAuth } = require("whatsapp-web.js");
 
-const { Client } = require("whatsapp-web.js");
-const client = new Client();
+// // Require database
+// const { MongoStore } = require("wwebjs-mongo");
+// const mongoose = require("mongoose");
 
-client.on("qr", (qr) => {
-  qrcode.generate(qr, { small: true });
+// mongoose
+//   .connect(
+//     `mongodb+srv://contactdevsamy:Delate4meM@cluster0.phjqqrf.mongodb.net/?retryWrites=true&w=majority`
+//   )
+//   .then(() => {
+//     const store = new MongoStore({ mongoose: mongoose });
+//     const client = new Client({
+//       authStrategy: new RemoteAuth({
+//         store: store,
+//         backupSyncIntervalMs: 300000,
+//       }),
+//     });
+
+//     client.initialize();
+//   });
+
+const { Client, LocalAuth } = require("whatsapp-web.js");
+
+const client = new Client({
+  authStrategy: new LocalAuth({
+    dataPath: "Sessions",
+  }),
 });
 
-client.on("ready", () => {
-  console.log("Client is ready!");
-});
-
-client.initialize();
+module.exports = { client };
