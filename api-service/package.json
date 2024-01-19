@@ -10,5 +10,16 @@
     "socket.io": "^4.7.4",
     "whatsapp-web.js": "^1.23.0",
     "wwebjs-mongo": "^1.1.0"
-  }
+  },
+  "name": "api-service",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
