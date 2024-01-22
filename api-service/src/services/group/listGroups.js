@@ -1,9 +1,9 @@
-const listGroup = async (client, io) => {
+const listGroup = (client, io) => {
   io.on("getChats", () => {
     client
       .getChats()
       .then((chats) => {
-        // console.log(first)
+        // console.log(chats);
         let groups = chats.filter((chat) => chat.isGroup == true);
         io.emit("chats", { groups });
       })
@@ -11,11 +11,6 @@ const listGroup = async (client, io) => {
         console.log(err);
       });
   });
-  //  client.on("ready", () => {
-  //    console.log("Client is ready !");
-  //    io.emit("listGroups", "Client is ready !");
-  // //    allSessions[clientId] = client;
-  //  });
 };
 
 module.exports = { listGroup };

@@ -1,11 +1,10 @@
 const express = require("express");
-// const { client } = require("./src/setup/watConfig");
 const { createProxyMiddleware } = require("http-proxy-middleware");
-const qrcode = require("qrcode-terminal");
 const { connectClient, allSessions } = require("./test");
 const cors = require("cors");
 const http = require("http");
 const socketIo = require("socket.io");
+const { listGroup } = require("./src/services/group/listGroups");
 
 const app = express();
 const server = http.createServer(app);
@@ -36,10 +35,18 @@ io.on("connect", (socket) => {
     console.log(data);
     console.log("received emit");
     const { id } = data;
+
+    // general websocket controller
     connectClient(id, socket);
   });
 
   // list groups
+});
+
+app.use((err, req, res, next) => {
+  res.status(500).json({
+    message: err?.message || "Something went wrong",
+  });
 });
 
 server.listen(4040, () => {

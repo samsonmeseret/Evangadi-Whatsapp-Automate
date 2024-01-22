@@ -1,7 +1,6 @@
 const { Client, LocalAuth } = require("whatsapp-web.js");
 const qrcode = require("qrcode-terminal");
 const { listGroup } = require("./src/services/group/listGroups");
-
 let allSessions = {};
 const connectClient = (clientId, io) => {
   const client = new Client({
@@ -12,6 +11,7 @@ const connectClient = (clientId, io) => {
       clientId: clientId,
     }),
   });
+  // client.createGroup("sdf",)
 
   //   if the client is not authenticated generate qr code
   client.on("qr", (qr) => {
@@ -35,7 +35,7 @@ const connectClient = (clientId, io) => {
     allSessions[clientId] = client;
   });
 
-  // list groups
+  //  list groups
   listGroup(client, io);
   //   initialize
   client.initialize();
